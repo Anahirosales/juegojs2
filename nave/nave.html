@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="css/main.css">
 </head>
 
-<body onkeydown="teclapresionada(event);">
+<body onkeydown="teclapresionada(event);" onekeyup = "teclaNoPresionada();"> 
     <canvas id="miCanvas" width="640" height="480"></canvas>
 </body>
     <script type="application/javascript">
@@ -84,7 +84,22 @@
          case 83:
          y++;
          break;
-         case 
+         case 68:
+         x++;
+         estaMoviendo = true;
+         if (indiceAnimacion < 4 && tiempoAcumulado >1)
+         {
+        
+            tiempoAcumulado = 0;
+            indiceAnimacion++;
+         }
+
+         break;
+         case 87:
+         y--;
+         break;
+        }
+    }
 
         function crearEnemigo() {
 			return {
@@ -143,8 +158,15 @@
 			if (x > 200) {
 				moverPersonaje = moverIzquierda;
 			}
-           
+           if (! estaMoviendo) {
+             if (indiceAnimacion !==2 && tiempoAcumulado > 1)  
+            {
+                tiempoAcumulado = 0;
+                indiceAnimacion -= indiceAnimacion > 2?1 : -1; 
+           }
         }
+        
+        
 		
         var A = function () {
             var b = 'Variable Privada';
@@ -170,7 +192,7 @@
 			enemigos.push(new enemigo());
 		}
 
-
+        }
        spriteSheet.src = 'images/1942-general-sprites.png'; 
     </script>
  
